@@ -9,12 +9,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ProductsScreen from "./screens/ProductsScreen.tsx";
+import SingleProductScreen from "./screens/SingleProductScreen.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<ProductsScreen />} />
       <Route path="/products" element={<ProductsScreen />} />
+      <Route path="/products/:id" element={<SingleProductScreen />} />
     </Route>
   )
 );

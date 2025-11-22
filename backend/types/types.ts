@@ -1,14 +1,14 @@
 export interface Review {
-  id: string;
-  userId: string;
-  userName: string;
+  id?: string;
+  user: string;
+  name: string;
   rating: number;
   comment: string;
-  date: string;
+  date?: string;
 }
 
 export interface Product {
-  id: string;
+  id?: string;
   name: string;
   price: number;
   image: string;
@@ -16,4 +16,5 @@ export interface Product {
   category: string;
   rating: number;
   reviews: Review[];
+  countInStock?: number;
 }
