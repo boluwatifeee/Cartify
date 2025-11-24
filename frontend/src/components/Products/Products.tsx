@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import type { Product } from "@/types/products.types";
 import {
   Card,
   CardDescription,
@@ -9,17 +6,10 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Link } from "react-router-dom";
+import { useGetProductsQuery } from "@/slices/productsApiSlice";
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await axios.get("/api/products");
-      setProducts(response.data);
-    };
-    fetchProducts();
-  }, []);
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

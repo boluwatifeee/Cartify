@@ -8,9 +8,10 @@ import { errorHandler, notFound } from "./middleware/errorMiddleware";
 dotenv.config();
 const port = process.env.PORT || 5000;
 
-connectDB();
-
 const app = express();
+
+// Connect to database (non-blocking)
+connectDB();
 
 // Enable CORS
 app.use(cors());
