@@ -1,24 +1,20 @@
 import { Button } from "@/components/ui/button";
-import type { Product } from "@/types/products.types";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useGetProductDetailsQuery } from "@/slices/productsApiSlice";
 import { Link, useParams } from "react-router-dom";
 
 export default function SingleProduct() {
   const { id: productId } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await axios.get(`/api/products/${productId}`);
-      setProduct(response.data);
-    };
-    fetchProduct();
-  }, [productId]);
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId);
 
   return (
     <div>
       <Link to="/products">Back</Link>
+      {isLoading ? <div>Loading...</div> : null}
+      {error ? <div>Error..</div> : null}
       {product && (
         <div>
           <div>
