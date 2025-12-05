@@ -4,11 +4,20 @@ import connectDB from "./config/db";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
+import userRoutes from "./routes/userRoutes";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 
 const app = express();
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware to parse cookies
+app.use(cookieParser());
 
 // Connect to database (non-blocking)
 connectDB();
@@ -16,15 +25,13 @@ connectDB();
 // Enable CORS
 app.use(cors());
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
 // Means that anytime we hit /api/products, we will use the productRoutes
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
