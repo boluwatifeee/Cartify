@@ -6,6 +6,7 @@ import productRoutes from "./routes/productRoutes";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import userRoutes from "./routes/userRoutes";
 import cookieParser from "cookie-parser";
+import orderRoutes from "./routes/orderRoutes";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 // Means that anytime we hit /api/products, we will use the productRoutes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
