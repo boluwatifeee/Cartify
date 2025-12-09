@@ -19,6 +19,13 @@ import ShippingScreen from "./screens/ShippingScreen.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
 import PaymentScreen from "./screens/PaymentScreen.tsx";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen.tsx";
+import OrderScreen from "./screens/OrderScreen.tsx";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || ""
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +40,7 @@ const router = createBrowserRouter(
         <Route path="/shipping" element={<ShippingScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/place-order" element={<PlaceOrderScreen />} />
+        <Route path="/order/:id" element={<OrderScreen />} />
       </Route>
     </Route>
   )
@@ -41,7 +49,9 @@ const router = createBrowserRouter(
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Elements stripe={stripePromise}>
+        <RouterProvider router={router} />
+      </Elements>
     </Provider>
   </StrictMode>
 );

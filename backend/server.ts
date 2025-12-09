@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 import connectDB from "./config/db";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes";
@@ -8,7 +9,7 @@ import userRoutes from "./routes/userRoutes";
 import cookieParser from "cookie-parser";
 import orderRoutes from "./routes/orderRoutes";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const port = process.env.PORT || 5000;
 
 const app = express();

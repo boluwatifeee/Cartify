@@ -18,7 +18,6 @@ export default function PaymentScreen() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(paymentMethod);
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/place-order");
   };
@@ -32,7 +31,7 @@ export default function PaymentScreen() {
   return (
     <FormContainer>
       <CheckoutSteps step1={true} step2={true} step3={true} />
-      <h1>Payment</h1>
+      <h1>Payment Method</h1>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <div className="flex items-center space-x-2">
           <Checkbox
@@ -42,6 +41,16 @@ export default function PaymentScreen() {
             className="w-4 h-4"
           />
           <Label htmlFor="PayPal">PayPal</Label>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="Stripe"
+            checked={paymentMethod === "Stripe"}
+            onCheckedChange={() => setPaymentMethod("Stripe")}
+            className="w-4 h-4"
+          />
+          <Label htmlFor="Stripe">Stripe</Label>
         </div>
 
         <Button type="submit">Continue</Button>
