@@ -197,14 +197,4 @@ npm run dev
 
 This will start both the backend server (port 8000) and frontend dev server (port 5174).
 
-## 📝 License
 
-ISC
-
-## 👤 Author
-
-[Your Name]
-
----
-
-**Note**: This is a temporary README. Update with actual project details, screenshots, and deployment instructions as the project progresses.
